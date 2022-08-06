@@ -1,0 +1,3 @@
+[submodule "python_redis_lib"]
+	path = python_redis_lib
+	url = git@bitbucket.org:rsk39/python_redis_lib.git
