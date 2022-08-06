@@ -1,0 +1,5 @@
+[logging]
+add_timestamp = false
+enable_console = true
+logfilename = ""
+enable_function_name = false

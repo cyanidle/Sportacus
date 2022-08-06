@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
-import hikari
+from src.sportacus import Sportacus
+from python_redis_lib.settings import Reader
+from python_redis_lib.initlogging import initLogging
 
-token = ""
-with open("TOKEN", "r") as file:
-    token = file.readline()
+def main():
+    logging_conf_reader = Reader(file="logging.toml")
+    initLogging(__file__, settings=logging_conf_reader.parseLogging())
+    sportacus = Sportacus()
+    sportacus.init()
+    sportacus.run()
 
-bot = hikari.GatewayBot(token=token)
+if __name__ == "__main__":
+    main()
