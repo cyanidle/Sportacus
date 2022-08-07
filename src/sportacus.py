@@ -56,8 +56,6 @@ class Sportacus:
                 await event.message.add_reaction("👌")
             except lightbulb.errors.BadRequestError as e:
                 log.error(f"Error replying with emoji:\n{e}")
-        @self.bot.listen(hikari.GuildMessageCreateEvent)
-        async def motivation_handle(event):
             await self.motivation.reply(event)
 
 
