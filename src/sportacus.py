@@ -2,6 +2,7 @@
 import hikari
 import asyncio
 import logging
+from .motivation import motivation as huiynya
 
 log = logging.getLogger("sportacus")
 
@@ -24,6 +25,10 @@ class Sportacus:
         @self.bot.listen(hikari.StartedEvent)
         async def Hello(event):
             log.info(f"Ready for some sport??")
+
+        @self.bot.listen(hikari.GuildMessageCreateEvent)
+        async def motivation_handle(event):
+            await huiynya(event)
 
 
     def run(self):
