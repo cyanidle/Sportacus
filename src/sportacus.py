@@ -7,7 +7,7 @@ import asyncio
 import logging
 from python_redis_lib.redis import RedisClient
 from python_redis_lib.settings import Reader, RedisSettings
-from .motivation import motivation as huiynya
+from .motivation import Motivation
 
 log = logging.getLogger("sportacus")
 
@@ -22,11 +22,7 @@ class Sportacus:
         self.Instance = self
         self.bot:lightbulb.BotApp = None
         self._redis:RedisClient = None
-        # motivation_reader = Reader(file="motivation.toml", dir="conf")
-        # try:
-        #     self.motivation:List[str] = motivation_reader.config_dict["motivation"]["phrases"]
-        # except KeyError:
-        #     log.error(f"Motivation not configured correctly")
+        self.motivation = Motivation()
 
     def registerRedis(self,redis):
         self._redis = redis
@@ -62,7 +58,7 @@ class Sportacus:
                 log.error(f"Error replying with emoji:\n{e}")
         @self.bot.listen(hikari.GuildMessageCreateEvent)
         async def motivation_handle(event):
-            await huiynya(event)
+            await self.motivation.reply(event)
 
 
     def run(self):

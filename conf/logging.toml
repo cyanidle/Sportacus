@@ -4,4 +4,5 @@ enable_console = true
 logfilename = ""
 enable_function_name = false
 [logging.levels]
-"python_redis_lib.redis" = "INFO"
+#"python_redis_lib.redis" = "INFO"
+"motivation" = "INFO"
