@@ -3,3 +3,5 @@ add_timestamp = false
 enable_console = true
 logfilename = ""
 enable_function_name = false
+[logging.levels]
+"python_redis_lib.redis" = "INFO"
