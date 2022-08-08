@@ -2,7 +2,7 @@
 import random
 from typing import List
 import lightbulb
-import discord
+import hikari
 import asyncio
 import logging
 from python_redis_lib.redis import RedisClient
@@ -39,8 +39,27 @@ class Sportacus:
         with open("TOKEN", "r") as file:
             token = file.readline()
             self.bot = lightbulb.BotApp(token=token, prefix="!")
+            
+        @self.bot.command
+        @lightbulb.command("help", "List commands and their descriptions")
+        @lightbulb.implements(lightbulb.SlashCommand)
+        async def help(ctx:lightbulb.Context):
+            await ctx.respond("Your mother doesnt love you!")
 
-        
+        @self.bot.listen(hikari.StartedEvent)
+        async def _hello(event:hikari.StartedEvent):
+            log.info(f"Ready for some sport??")
+
+        @self.bot.listen(hikari.MessageCreateEvent)
+        async def _reply(event:hikari.MessageCreateEvent):
+            try:
+                await event.message.add_reaction("👌")
+            except lightbulb.errors.BadRequestError as e:
+                log.error(f"Error replying with emoji:\n{e}")
+        @self.bot.listen(hikari.GuildMessageCreateEvent)
+        async def motivation_handle(event):
+            await self.motivation.reply(event)
+
         
 
 
