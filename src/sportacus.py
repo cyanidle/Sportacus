@@ -39,7 +39,7 @@ class Sportacus:
         with open("TOKEN", "r") as file:
             token = file.readline()
             self.bot = lightbulb.BotApp(token=token, prefix="!")
-            
+
         @self.bot.command
         @lightbulb.command("help", "List commands and their descriptions")
         @lightbulb.implements(lightbulb.SlashCommand)
@@ -56,8 +56,6 @@ class Sportacus:
                 await event.message.add_reaction("👌")
             except lightbulb.errors.BadRequestError as e:
                 log.error(f"Error replying with emoji:\n{e}")
-        @self.bot.listen(hikari.GuildMessageCreateEvent)
-        async def motivation_handle(event):
             await self.motivation.reply(event)
 
         
