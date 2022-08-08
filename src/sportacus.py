@@ -52,13 +52,24 @@ class Sportacus:
 
         @self.bot.listen(hikari.MessageCreateEvent)
         async def _reply(event:hikari.MessageCreateEvent):
+            if event.author.is_bot:
+                return
             try:
                 await event.message.add_reaction("👌")
             except lightbulb.errors.BadRequestError as e:
                 log.error(f"Error replying with emoji:\n{e}")
             await self.motivation.reply(event)
 
-        
+        @self.bot.command
+        @lightbulb.command("join", "Join voice chat!")
+        @lightbulb.implements(lightbulb.SlashCommand)
+        async def help(ctx:lightbulb.SlashContext):
+            state = ctx.get_guild().get_voice_states().get(ctx.member.id)
+            if state is None:
+                await ctx.respond("You are not in voice chat!")
+                return
+            await self.bot.update_voice_state(ctx.guild_id,state.channel_id)
+
 
 
     def run(self):

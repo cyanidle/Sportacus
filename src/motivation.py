@@ -16,7 +16,8 @@ class Motivation:
         self.matcher = re.compile("[\s({]м+отивац[а-я]{2,3}[\s.?!:)}]")
 
     async def reply(self, event: hikari.GuildMessageCreateEvent):
-        raw = f" {event.content.lower()} "
-        if self.matcher.match(raw):
-            await event.message.respond(random.choice(self.sources))
+        if isinstance(event.content, str):
+            raw = f" {event.content.lower()} "
+            if self.matcher.match(raw):
+                await event.message.respond(random.choice(self.sources))
         
