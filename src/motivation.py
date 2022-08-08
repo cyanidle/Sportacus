@@ -2,6 +2,7 @@
 import logging
 import random
 import re
+import hikari
 import asyncio
 from typing import List
 
