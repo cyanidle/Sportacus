@@ -34,7 +34,9 @@ services:
   lavalink:
     networks:
         - sportacus-net
-    image: fredboat/lavalink:3.5-rc2
+    build:
+      context: ./lavalink
+      dockerfile: Dockerfile.lavalink
     logging:
       driver: "json-file"
       options:

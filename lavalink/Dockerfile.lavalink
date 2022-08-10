@@ -1,0 +1,4 @@
+FROM fredboat/lavalink:3.5-rc2
+COPY ./application.yml /opt/Lavalink
+WORKDIR /opt/Lavalink
+CMD ["java", "-jar", "Lavalink.jar"]
