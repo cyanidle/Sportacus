@@ -9,4 +9,3 @@ RUN set -eux; \
     pip3 install -r requirements.txt; 
 ENV TZ=${timeZone}
 CMD ["python", "app.py"]
-CMD ["bash"]
