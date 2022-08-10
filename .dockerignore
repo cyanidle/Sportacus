@@ -1,0 +1,10 @@
+*
+
+**/__pycache__
+**/*pyc
+!*.py
+!LICENSE
+!requirements.txt
+!conf/
+!python_redis_lib/
+!src/

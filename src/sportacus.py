@@ -46,7 +46,7 @@ class Sportacus:
             return self._music
 
     def init(self):
-        with open("TOKEN", "r") as file:
+        with open("conf/TOKEN", "r") as file:
             token = file.readline()
             self.bot = lightbulb.BotApp(token=token, prefix="!")
 

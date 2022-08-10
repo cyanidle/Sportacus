@@ -1,0 +1,46 @@
+services:
+
+  redis:
+    image: redis:6.2.7-bullseye
+    networks:
+      - sportacus-net
+    environment:
+    - TZ=Europe/Kaliningrad
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"
+    volumes:
+      - type: bind
+        source: ./redis
+        target: /data
+
+  sportacus:
+    build: .
+    networks:
+      - sportacus-net
+    volumes:
+      - type: bind
+        source: ./conf
+        target: /conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"
+
+  lavalink:
+    networks:
+        - sportacus-net
+    image: fredboat/lavalink:3.5-rc2
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"
+
+networks:
+  sportacus-net:
+    driver: bridge
