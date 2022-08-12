@@ -93,8 +93,8 @@ class Sportacus:
         @lightbulb.command("play", "Queue video from youtube")
         @lightbulb.implements(lightbulb.SlashCommand)
         async def play_command(ctx:lightbulb.SlashContext):
-            pass
-
+            await self.music.play(ctx)
+            await ctx.respond("Never gonna give you up!")
 
     def run(self):
         self.bot.run()

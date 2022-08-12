@@ -1,8 +1,13 @@
 import asyncio
 from dataclasses import dataclass
+import logging
 from lavaplayer import Lavalink
 import lightbulb
+from hikari import Snowflake
 from python_redis_lib.settings import Reader
+
+log = logging.getLogger("music")
+log.info("LOGGING USING NAME: 'music'")
 
 @dataclass
 class MusicPlayerSettings:
@@ -23,5 +28,16 @@ class MusicPlayer:
                                  password="youshallnotpass", user_id=settings.lavalink_user_id, loop=ioloop)
         self.lavalink.connect()
 
-    def play(self, ctx:lightbulb.SlashContext):
-        pass
+    async def add_new_guild(self, guild_id: Snowflake):
+        await self.lavalink.create_new_node(guild_id)
+        await self.lavalink.wait_for_connection(guild_id)
+        
+
+    async def play(self, ctx:lightbulb.SlashContext):
+        options = ctx.options
+        await self.add_new_guild(ctx.guild_id)
+        try:
+            tracks = await self.lavalink.search_youtube("aboba")
+        except Exception as e:
+            log.exception(e)
+        await self.lavalink.play(ctx.guild_id, track=tracks[0], start=True)
