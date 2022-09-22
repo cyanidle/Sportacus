@@ -14,7 +14,7 @@ class Motivation:
     def __init__(self) -> None:
         self.sources:List[str] = []
         motivation_reader = Reader(file="motivation.toml")
-        self.sources = motivation_reader.config_dict.get("motivation").get("phrases")
+        self.sources = motivation_reader.parsed.get("motivation").get("phrases")
         self.matcher = re.compile("[\s({]м+отивац[а-я]{2,3}[\s.?!:)}]")
 
     async def reply(self, event: hikari.GuildMessageCreateEvent):

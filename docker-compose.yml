@@ -1,5 +1,4 @@
 services:
-
   redis:
     image: redis:6.2.7-bullseye
     networks:
@@ -16,7 +15,6 @@ services:
       - type: bind
         source: ./redis
         target: /data
-
   sportacus:
     build: .
     networks:
@@ -25,18 +23,6 @@ services:
       - type: bind
         source: ./conf
         target: /app/conf
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "2"
-
-  lavalink:
-    networks:
-        - sportacus-net
-    build:
-      context: ./lavalink
-      dockerfile: Dockerfile.lavalink
     logging:
       driver: "json-file"
       options:

@@ -6,7 +6,7 @@ import hikari
 import asyncio
 import logging
 from python_redis_lib.redis import RedisClient
-from python_redis_lib.settings import Reader, RedisSettings
+from python_redis_lib.settings import Reader, RedisSettings, get_env_value
 from .motivation import Motivation
 
 log = logging.getLogger("sportacus")
@@ -36,9 +36,7 @@ class Sportacus:
             return self._redis
 
     def init(self):
-        with open("conf/TOKEN", "r") as file:
-            token = file.readline()
-            self.bot = lightbulb.BotApp(token=token, prefix="!")
+        self.bot = lightbulb.BotApp(token=get_env_value("BOT_TOKEN"), prefix="!")
 
         @self.bot.command
         @lightbulb.command("help", "List commands and their descriptions")

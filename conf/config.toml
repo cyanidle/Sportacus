@@ -2,7 +2,8 @@
 # commands_stream = "fountains:foam"
 # output_stream = "bolid:commands"
 #host = "redis"
-host = "127.0.0.1"
-port = 6379
+server.name = "redis.local"
+server.host = "127.0.0.1"
+server.port = 6379
 max_publish_length = 10000
 max_commands_length = 10000
