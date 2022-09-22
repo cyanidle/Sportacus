@@ -6,6 +6,8 @@ from python_redis_lib.initlogging import initLogging
 from python_redis_lib.supervisor import get_loop
 import threading
 
+
+
 def main():
     logging_conf_reader = Reader(file="logging.toml")
     initLogging(__file__, settings=logging_conf_reader.parse(LoggingSettings, key="logging"))
@@ -15,6 +17,7 @@ def main():
     redis_thr.daemon = True
     redis_thr.start()
     sportacus.run()
+    
 
 def main_redis(sportacus: Sportacus):
     config_reader = Reader(file="config.toml")
